@@ -10,6 +10,8 @@ import com.example.jayshri.chalochallenge.adapter.AllRoutesAdapter;
 import com.example.jayshri.chalochallenge.models.RouteInfoData;
 import  java.util.*;
 
+import retrofit2.Response;
+
 public class ProcessAllRouteDataInfo extends DataViewProcessor{
 
 
@@ -21,8 +23,8 @@ public class ProcessAllRouteDataInfo extends DataViewProcessor{
     }
 
     @Override
-    public void processData(Object data) {
-        List<RouteInfoData> responseData = (List<RouteInfoData>) data;
+    public void processData(Response data) {
+        List<RouteInfoData> responseData = (List<RouteInfoData>) (data.body());
         routeInfoDataList.addAll(responseData);
         setRecyclerView();
     }

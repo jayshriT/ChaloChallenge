@@ -7,18 +7,22 @@ import com.example.jayshri.chalochallenge.utilities.CallBackForData;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 import retrofit2.Call;
+import retrofit2.Callback;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+
 public class MainServiceImpl implements  MainService{
 
     private ApiService apiService;
     private CallBackForData callBackForRouteInfoData;
+    private CallBackForData <NextStopData> callBackForNextCallData;
+
+    public MainServiceImpl(ApiService apiService, CallBackForData callBackForRouteInfoData, CallBackForData<NextStopData> callBackForNextCallData) {
+        this.apiService = apiService;
+        this.callBackForRouteInfoData = callBackForRouteInfoData;
+        this.callBackForNextCallData = callBackForNextCallData;
+    }
+
 
     @Override
     public void getAllRoute() {
@@ -27,6 +31,6 @@ public class MainServiceImpl implements  MainService{
 
     @Override
     public void getNextStop(long routeId , long stopId) {
-         apiService.getNextStop(routeId, stopId).enqueue(callBackForRouteInfoData);
+         apiService.getNextStop(routeId, stopId).enqueue(callBackForNextCallData);
     }
 }

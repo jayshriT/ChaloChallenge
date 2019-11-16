@@ -8,33 +8,26 @@ import org.springframework.core.GenericTypeResolver;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Slf4j
-public class CallBackForData<T> implements Callback <T> {
+
+public class CallBackForData <T> implements Callback <T>{
 
 
-    private DataViewProcessor processorForNextNode;
-    private DataViewProcessor processorForAllRouteData;
+    private DataViewProcessor dataViewProcessor;
+
 
     private static Logger logger = Logger.getLogger(CallBackForData.class.getName());
+
+    public CallBackForData(DataViewProcessor dataViewProcessor) {
+        this.dataViewProcessor = dataViewProcessor;
+    }
+
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
-        Class c = GenericTypeResolver.resolveTypeArgument(response.getClass() , Response.class);
-        if(c.getName().equals(NextStopData.class.getName())){
-            processorForNextNode.processData(response);
-        } else {
-            processorForAllRouteData.processData(response);
-        }
+        dataViewProcessor.processData(response);
     }
 
     @Override

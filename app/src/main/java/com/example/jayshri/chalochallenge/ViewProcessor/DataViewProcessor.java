@@ -10,14 +10,9 @@ import com.example.jayshri.chalochallenge.models.RouteInfoData;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import retrofit2.Response;
 
-
-@Builder
-@AllArgsConstructor
-public abstract class DataViewProcessor <T>{
+public abstract class DataViewProcessor{
 
     public ProgressBar progressBar;
     public LinearLayoutManager linearLayoutManager;
@@ -25,7 +20,16 @@ public abstract class DataViewProcessor <T>{
     public AllRoutesAdapter allRoutesAdapter;
     public Context context;
 
-    public void processData(T data){
+    public DataViewProcessor(ProgressBar progressBar, LinearLayoutManager linearLayoutManager, RecyclerView recyclerView, AllRoutesAdapter allRoutesAdapter, Context context) {
+        this.progressBar = progressBar;
+        this.linearLayoutManager = linearLayoutManager;
+        this.recyclerView = recyclerView;
+        this.allRoutesAdapter = allRoutesAdapter;
+        this.context = context;
+    }
+
+
+    public void processData(Response data){
         //default implemention
     }
 }

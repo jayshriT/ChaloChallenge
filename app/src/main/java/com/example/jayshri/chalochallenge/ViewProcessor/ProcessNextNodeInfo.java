@@ -11,14 +11,16 @@ import com.example.jayshri.chalochallenge.models.RouteInfoData;
 
 import java.util.List;
 
-public class ProcessNextNodeInfo extends DataViewProcessor<NextStopData>{
+import retrofit2.Response;
+
+public class ProcessNextNodeInfo extends DataViewProcessor{
 
     public ProcessNextNodeInfo(ProgressBar progressBar, LinearLayoutManager linearLayoutManager, RecyclerView recyclerView, AllRoutesAdapter allRoutesAdapter, Context context) {
         super(progressBar, linearLayoutManager, recyclerView, allRoutesAdapter, context);
     }
 
     @Override
-    public void processData(NextStopData data) {
+    public void processData(Response data) {
 
     }
 }

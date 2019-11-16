@@ -18,6 +18,7 @@ import com.example.jayshri.chalochallenge.com.example.jayshri.chalochallenge.Bac
 import com.example.jayshri.chalochallenge.com.example.jayshri.chalochallenge.BackEndService.ApiServiceImpl;
 import com.example.jayshri.chalochallenge.com.example.jayshri.chalochallenge.BackEndService.MainService;
 import com.example.jayshri.chalochallenge.com.example.jayshri.chalochallenge.BackEndService.MainServiceImpl;
+import com.example.jayshri.chalochallenge.models.NextStopData;
 import com.example.jayshri.chalochallenge.models.RouteInfoData;
 import com.example.jayshri.chalochallenge.utilities.CallBackForData;
 import com.example.jayshri.chalochallenge.utilities.RetrofitClient;
@@ -68,8 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
         DataViewProcessor viewProcessorForAllRoutes = new ProcessAllRouteDataInfo(progressBar ,linearLayoutManager , recyclerView ,allRoutesAdapter, context);
         DataViewProcessor viewProcessorForNode = new ProcessAllRouteDataInfo(progressBar , linearLayoutManager , recyclerView , allRoutesAdapter , context);
-        CallBackForData callBackForData = CallBackForData.builder().processorForAllRouteData(viewProcessorForAllRoutes).processorForNextNode(viewProcessorForNode).build();
 
-        mainService = MainServiceImpl.builder().apiService(apiService).callBackForRouteInfoData(callBackForData).build();
+        CallBackForData callBackForData = new CallBackForData(viewProcessorForAllRoutes );
+        CallBackForData<NextStopData> callBackForNextStopData = new CallBackForData<>(viewProcessorForNode);
+
+
+        mainService = new MainServiceImpl(apiService , callBackForData , callBackForNextStopData);
     }
 }
