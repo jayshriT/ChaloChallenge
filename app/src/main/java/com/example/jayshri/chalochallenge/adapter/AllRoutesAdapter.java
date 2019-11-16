@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.jayshri.chalochallenge.ItemClickListener;
 import com.example.jayshri.chalochallenge.R;
 import com.example.jayshri.chalochallenge.models.RouteInfoData;
 import com.example.jayshri.chalochallenge.models.StopData;
@@ -17,6 +18,7 @@ import java.util.List;
 public class AllRoutesAdapter extends RecyclerView.Adapter<AllRoutesAdapter.ViewHolder> {
 
     private Context context;
+    private ItemClickListener itemClickListener;
     private List<RouteInfoData> routeInfoDataList;
     public AllRoutesAdapter(Context context, List<RouteInfoData> routeInfoDataList){
         this.context = context;
@@ -48,17 +50,29 @@ public class AllRoutesAdapter extends RecyclerView.Adapter<AllRoutesAdapter.View
         return routeInfoDataList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
         private TextView routeNAme;
         private TextView firstStop;
         private TextView lastStop;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             routeNAme = itemView.findViewById(R.id.route_name_card);
             firstStop  = itemView.findViewById(R.id.route_content_card);
             lastStop = itemView.findViewById(R.id.route_content_card1);
 
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (itemClickListener != null) {
+                itemClickListener.itemClicked(routeInfoDataList.get(getAdapterPosition()),getAdapterPosition());
+            }
         }
     }
 }
