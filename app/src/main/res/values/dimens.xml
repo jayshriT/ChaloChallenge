@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_imageview">16dp</dimen>
+    <dimen name="margin_card">16dp</dimen>
+    <dimen name="type_box_height">55dp</dimen>
+</resources>
