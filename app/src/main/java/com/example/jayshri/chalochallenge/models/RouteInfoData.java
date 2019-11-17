@@ -1,8 +1,9 @@
 package com.example.jayshri.chalochallenge.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RouteInfoData {
+public class RouteInfoData  implements Serializable{
     private String routeId;
     private String routeName;
     private List<StopData> stopDataList;

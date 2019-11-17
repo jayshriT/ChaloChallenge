@@ -1,6 +1,8 @@
 package com.example.jayshri.chalochallenge.models;
 
-public class StopData {
+import java.io.Serializable;
+
+public class StopData implements Serializable {
 
     private String stopId;
     private String stopName;
